@@ -348,13 +348,10 @@ const uploadExcel = async (req, res) => {
         for (let i = 0; i < sheetData.length; i++) {
             const row = sheetData[i];
             let dateVal = row.date;
-            // Jika date terbaca sebagai serial number Excel
             if (typeof dateVal === 'number') {
-                // Konversi serial number ke YYYY-MM-DD
                 dateVal = new Date((dateVal - 25569) * 86400 * 1000).toISOString().split('T')[0];
             }
 
-            // Pengecekan bentrok jadwal
             const checkQuery = `
                 SELECT id, class_code, teacher_nik 
                 FROM schedules 
@@ -369,8 +366,8 @@ const uploadExcel = async (req, res) => {
                 const reason = conflict.class_code === row.class_code
                     ? `Kelas ${row.class_code} bentrok`
                     : `Guru ${row.teacher_nik} bentrok`;
-                failedRows.push({ row: i + 2, data: row, reason: reason }); // +2 karena baris 1 adalah header Excel
-                continue; // Skip baris ini
+                failedRows.push({ row: i + 2, data: row, reason: reason }); 
+                continue;
             }
 
             const query = `
@@ -453,14 +450,14 @@ const exportExcel = async (req, res) => {
 
         const headerRow1 = [
             'No', 'NIK', 'Nama Pengajar', 'Kelas yg Diajar',
-            'Total Jam Pelajaran Per Pekan', '', '', '', '',  // merge E1:I1
+            'Total Jam Pelajaran Per Pekan', '', '', '', '',  
             'Total JP'
         ];
 
         const headerRow2 = [
-            '', '', '', '',                                   // merge ke bawah (A2:D2)
+            '', '', '', '',                                   
             'Pekan 1', 'Pekan 2', 'Pekan 3', 'Pekan 4', 'Pekan 5',
-            ''                                                // merge ke bawah (J2)
+            ''                                                
         ];
 
         const dataRows = result.rows.map((row, i) => [
