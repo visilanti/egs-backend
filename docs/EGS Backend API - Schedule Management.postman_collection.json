@@ -1758,6 +1758,574 @@
           "body": "{\n    \"status\": \"Success\",\n    \"message\": \"Schedule deleted successfully\",\n    \"data\": {\n        \"id\": \"07c1f150-1803-4418-93b3-3ec6ed9fb691\",\n        \"class_code\": \"XA01\",\n        \"class_name\": \"X-A\",\n        \"subject_code\": \"PHYS\",\n        \"teacher_nik\": \"20222031\",\n        \"teacher_name\": \"Budi Santoso, M.Pd.\",\n        \"date\": \"2025-02-17T00:00:00.000Z\",\n        \"jam_ke\": 3,\n        \"time_start\": \"12:20:00\",\n        \"time_end\": \"13:00:00\"\n    }\n}"
         }
       ]
+    },
+    {
+      "name": "📊 GET Export Excel",
+      "item": [
+        {
+          "name": "[TC-01] 400 - Tanpa parameter sama sekali",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code adalah 400', () => pm.response.to.have.status(400));",
+                  "pm.test('status = Bad Request', () => pm.expect(pm.response.json().status).to.eql('Bad Request'));",
+                  "pm.test('message menyebut YYYY-MM-DD', () => pm.expect(pm.response.json().message).to.include('YYYY-MM-DD'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/export",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "export"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "400 - Tanpa parameter",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/schedules/export",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "schedules",
+                    "export"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\"status\":\"Bad Request\",\"message\":\"start_date dan end_date wajib diisi (format: YYYY-MM-DD)\"}"
+            }
+          ]
+        },
+        {
+          "name": "[TC-02] 400 - Hanya start_date, end_date kosong",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code adalah 400', () => pm.response.to.have.status(400));",
+                  "pm.test('status = Bad Request', () => pm.expect(pm.response.json().status).to.eql('Bad Request'));",
+                  "pm.test('message menyebut YYYY-MM-DD', () => pm.expect(pm.response.json().message).to.include('YYYY-MM-DD'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/export?start_date=2026-06-01",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2026-06-01"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "400 - Hanya start_date",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/schedules/export?start_date=2026-06-01",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "schedules",
+                    "export"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2026-06-01"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\"status\":\"Bad Request\",\"message\":\"start_date dan end_date wajib diisi (format: YYYY-MM-DD)\"}"
+            }
+          ]
+        },
+        {
+          "name": "[TC-03] 400 - Format tanggal tidak valid (DD-MM-YYYY)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code adalah 400', () => pm.response.to.have.status(400));",
+                  "pm.test('status = Bad Request', () => pm.expect(pm.response.json().status).to.eql('Bad Request'));",
+                  "pm.test('message menyebut Format tanggal tidak valid', () => pm.expect(pm.response.json().message).to.include('Format tanggal tidak valid'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/export?start_date=01-06-2026&end_date=30-06-2026",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "01-06-2026"
+                },
+                {
+                  "key": "end_date",
+                  "value": "30-06-2026"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "400 - Format DD-MM-YYYY",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/schedules/export?start_date=01-06-2026&end_date=30-06-2026",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "schedules",
+                    "export"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "01-06-2026"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "30-06-2026"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\"status\":\"Bad Request\",\"message\":\"Format tanggal tidak valid. Gunakan format YYYY-MM-DD\"}"
+            }
+          ]
+        },
+        {
+          "name": "[TC-04] 400 - start_date lebih besar dari end_date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code adalah 400', () => pm.response.to.have.status(400));",
+                  "pm.test('status = Bad Request', () => pm.expect(pm.response.json().status).to.eql('Bad Request'));",
+                  "pm.test('message menyebut start_date tidak boleh lebih besar', () => pm.expect(pm.response.json().message).to.include('start_date tidak boleh lebih besar'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/export?start_date=2026-12-31&end_date=2026-01-01",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2026-12-31"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2026-01-01"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "400 - start_date > end_date",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/schedules/export?start_date=2026-12-31&end_date=2026-01-01",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "schedules",
+                    "export"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2026-12-31"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2026-01-01"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\"status\":\"Bad Request\",\"message\":\"start_date tidak boleh lebih besar dari end_date\"}"
+            }
+          ]
+        },
+        {
+          "name": "[TC-05] 404 - Range valid tapi tidak ada data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code adalah 404', () => pm.response.to.have.status(404));",
+                  "pm.test('status = Not Found', () => pm.expect(pm.response.json().status).to.eql('Not Found'));",
+                  "pm.test('message menyebut kedua tanggal', () => { var msg=pm.response.json().message; pm.expect(msg).to.include('2000-01-01'); pm.expect(msg).to.include('2000-01-31'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/export?start_date=2000-01-01&end_date=2000-01-31",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2000-01-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2000-01-31"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "404 - Tidak ada data di range",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/schedules/export?start_date=2000-01-01&end_date=2000-01-31",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "schedules",
+                    "export"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2000-01-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2000-01-31"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\"status\":\"Not Found\",\"message\":\"Tidak ada data jadwal antara 2000-01-01 dan 2000-01-31\"}"
+            }
+          ]
+        },
+        {
+          "name": "[TC-06] 200 - Laporan berhasil dibuat, dapat download_url",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code adalah 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Content-Type adalah JSON', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json'));",
+                  "pm.test('status = Success', () => pm.expect(pm.response.json().status).to.eql('Success'));",
+                  "pm.test('message = Laporan berhasil dibuat', () => pm.expect(pm.response.json().message).to.eql('Laporan berhasil dibuat'));",
+                  "pm.test('download_url ada di response', () => pm.expect(pm.response.json()).to.have.property('download_url'));",
+                  "pm.test('download_url mengandung parameter yang benar', () => { var url=pm.response.json().download_url; pm.expect(url).to.include('start_date=2026-06-01'); pm.expect(url).to.include('end_date=2026-06-30'); pm.expect(url).to.include('download=true'); });",
+                  "pm.environment.set('EXPORT_DOWNLOAD_URL', pm.response.json().download_url);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/export?start_date=2026-06-01&end_date=2026-06-30",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2026-06-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2026-06-30"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Laporan berhasil dibuat",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/schedules/export?start_date=2026-06-01&end_date=2026-06-30",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "schedules",
+                    "export"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2026-06-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2026-06-30"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\"status\":\"Success\",\"message\":\"Laporan berhasil dibuat\",\"download_url\":\"http://localhost:3000/api/schedules/export?start_date=2026-06-01&end_date=2026-06-30&download=true\"}"
+            }
+          ]
+        },
+        {
+          "name": "[TC-07] 200 - Download file .xlsx via ?download=true",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code adalah 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Content-Type adalah xlsx', () => pm.expect(pm.response.headers.get('Content-Type')).to.include('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'));",
+                  "pm.test('Content-Disposition berisi attachment dan rekap_jp_', () => { var cd=pm.response.headers.get('Content-Disposition'); pm.expect(cd).to.include('attachment'); pm.expect(cd).to.include('rekap_jp_'); pm.expect(cd).to.include('.xlsx'); });",
+                  "pm.test('Body tidak kosong (file berisi data)', () => pm.expect(pm.response.responseSize).to.be.above(0));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/export?start_date=2026-06-01&end_date=2026-06-30&download=true",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2026-06-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2026-06-30"
+                },
+                {
+                  "key": "download",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - File xlsx terunduh",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/schedules/export?start_date=2026-06-01&end_date=2026-06-30&download=true",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "schedules",
+                    "export"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "2026-06-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2026-06-30"
+                    },
+                    {
+                      "key": "download",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Disposition",
+                  "value": "attachment; filename=\"rekap_jp_2026-06-01_2026-06-30.xlsx\""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
     }
   ],
   "auth": {

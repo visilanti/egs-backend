@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs');
 const pool = require('../config/db');
 const xlsx = require('xlsx');
 
@@ -51,10 +53,10 @@ const createSchedule = async (req, res) => {
 
         if (conflictCheck.rows.length > 0) {
             const conflict = conflictCheck.rows[0];
-            const reason = conflict.class_code === class_code 
+            const reason = conflict.class_code === class_code
                 ? `Kelas ${class_code} sudah memiliki jadwal di jam tersebut`
                 : `Guru dengan NIK ${teacher_nik} sudah memiliki jadwal di jam tersebut`;
-                
+
             return res.status(409).json({
                 status: 'Conflict',
                 message: `Bentrok jadwal: ${reason}`
@@ -116,10 +118,10 @@ const updateSchedule = async (req, res) => {
 
         if (conflictCheck.rows.length > 0) {
             const conflict = conflictCheck.rows[0];
-            const reason = conflict.class_code === class_code 
+            const reason = conflict.class_code === class_code
                 ? `Kelas ${class_code} sudah memiliki jadwal di jam tersebut`
                 : `Guru dengan NIK ${teacher_nik} sudah memiliki jadwal di jam tersebut`;
-                
+
             return res.status(409).json({
                 status: 'Conflict',
                 message: `Bentrok jadwal: ${reason}`
@@ -192,30 +194,6 @@ const deleteSchedule = async (req, res) => {
     }
 }
 
-//Get by class code 
-const getSchedulesByClassCode = async (req, res) => {
-    try {
-        const { class_code } = req.params;
-        const query = `
-        SELECT *
-        FROM schedules
-        WHERE class_code = $1
-        ORDER BY date ASC, jam_ke ASC;
-        `;
-        const result = await pool.query(query, [class_code]);
-        res.status(200).json({
-            status: 'Success',
-            message: 'Schedules retrieved successfully',
-            data: result.rows
-        });
-    } catch (error) {
-        res.status(500).json({
-            status: 'Error',
-            message: error.message
-        });
-    }
-}
-
 // Student: Get schedule by class code and date 
 const getStudentSchedule = async (req, res) => {
     try {
@@ -238,9 +216,13 @@ const getStudentSchedule = async (req, res) => {
         }));
 
         return res.status(200).json({
-            "classname": className,
-            "date": date,
-            "Jadwal": jadwalMapped
+            status: 'Success',
+            message: 'Student schedule retrieved successfully',
+            data: {
+                "class_name": className,
+                "date": date,
+                "jadwal": jadwalMapped
+            }
         });
     } catch (error) {
         res.status(500).json({
@@ -254,7 +236,10 @@ const getStudentSchedule = async (req, res) => {
 const getTeacherSchedule = async (req, res) => {
     try {
         const { teacher_nik, start_date, end_date } = req.query;
-        if (!teacher_nik || !start_date || !end_date) return res.status(400).json({ error: 'teacher_nik, start_date, dan end_date wajib diisi' });
+        if (!teacher_nik || !start_date || !end_date) return res.status(400).json({
+            status: 'Bad Request',
+            message: 'teacher_nik, start_date, dan end_date wajib diisi'
+        });
 
         const query = `SELECT * FROM schedules WHERE teacher_nik = $1 AND date BETWEEN $2 AND $3 ORDER BY date ASC, jam_ke ASC;`;
         const result = await pool.query(query, [teacher_nik, start_date, end_date]);
@@ -272,10 +257,14 @@ const getTeacherSchedule = async (req, res) => {
         }));
 
         return res.status(200).json({
-            "teacher_name": teacherName,
-            "periode": { "start date": start_date, "end_date": end_date },
-            "total jp": totalJp,
-            "jadwal": jadwalMapped
+            status: 'Success',
+            message: 'Teacher schedule retrieved successfully',
+            data: {
+                "teacher_name": teacherName,
+                "periode": { "start_date": start_date, "end_date": end_date },
+                "total_jp": totalJp,
+                "jadwal": jadwalMapped
+            }
         });
     } catch (error) {
         res.status(500).json({
@@ -289,7 +278,10 @@ const getTeacherSchedule = async (req, res) => {
 const getYayasanReport = async (req, res) => {
     try {
         const { start_date, end_date } = req.query;
-        if (!start_date || !end_date) return res.status(400).json({ error: 'start_date dan end_date wajib diisi' });
+        if (!start_date || !end_date) return res.status(400).json({
+            status: 'Bad Request',
+            message: 'start_date dan end_date wajib diisi'
+        });
 
         const query = `SELECT * FROM schedules WHERE date BETWEEN $1 AND $2;`;
         const result = await pool.query(query, [start_date, end_date]);
@@ -312,9 +304,9 @@ const getYayasanReport = async (req, res) => {
         });
 
         const rekapArray = Object.values(rekapMap).map(t => ({
-            "teacher nik": t["teacher nik"], 
+            "teacher nik": t["teacher nik"],
             "teacher_name": t.teacher_name,
-            "total jp": t["total jp"], 
+            "total jp": t["total jp"],
             "total_kelas": t.classes.size,
             "detail": Object.keys(t.classDetails).map(cName => ({
                 "class_name": cName,
@@ -323,9 +315,13 @@ const getYayasanReport = async (req, res) => {
         }));
 
         return res.status(200).json({
-            "periode": { "start date": start_date, "end date": end_date },
-            "total pengajar": rekapArray.length,
-            "rekap": rekapArray
+            status: 'Success',
+            message: 'Yayasan report retrieved successfully',
+            data: {
+                "periode": { "start_date": start_date, "end_date": end_date },
+                "total_pengajar": rekapArray.length,
+                "rekap": rekapArray
+            }
         });
     } catch (error) {
         res.status(500).json({
@@ -338,7 +334,10 @@ const getYayasanReport = async (req, res) => {
 //upload excel 
 const uploadExcel = async (req, res) => {
     try {
-        if (!req.file) return res.status(400).json({ error: 'File Excel wajib diupload' });
+        if (!req.file) return res.status(400).json({
+            status: 'Bad Request',
+            message: 'File Excel wajib diupload'
+        });
 
         const workbook = xlsx.read(req.file.buffer, { type: 'buffer' });
         const sheetName = workbook.SheetNames[0];
@@ -346,7 +345,7 @@ const uploadExcel = async (req, res) => {
 
         let successCount = 0;
         let failedRows = [];
-        
+
         for (let i = 0; i < sheetData.length; i++) {
             const row = sheetData[i];
             let dateVal = row.date;
@@ -368,7 +367,7 @@ const uploadExcel = async (req, res) => {
 
             if (conflictCheck.rows.length > 0) {
                 const conflict = conflictCheck.rows[0];
-                const reason = conflict.class_code === row.class_code 
+                const reason = conflict.class_code === row.class_code
                     ? `Kelas ${row.class_code} bentrok`
                     : `Guru ${row.teacher_nik} bentrok`;
                 failedRows.push({ row: i + 2, data: row, reason: reason }); // +2 karena baris 1 adalah header Excel
@@ -388,54 +387,307 @@ const uploadExcel = async (req, res) => {
             successCount++;
         }
 
-        res.status(200).json({ 
+        res.status(200).json({
+            status: 'Success',
             message: `Upload selesai. ${successCount} baris berhasil, ${failedRows.length} baris gagal.`,
-            success_count: successCount,
-            failed_count: failedRows.length,
-            failed_rows: failedRows
-        }); 
+            data: {
+                success_count: successCount,
+                failed_count: failedRows.length,
+                failed_rows: failedRows
+            }
+        });
     } catch (error) {
-        res.status(500).json({ 
+        res.status(500).json({
             status: 'Error',
-            message: error.message 
+            message: error.message
         });
     }
 };
 
 //export excel
 const exportExcel = async (req, res) => {
-    try {
-        const { start_date, end_date } = req.query;
-        
-        // Mengambil rekap mingguan/bulanan dari DB
-        const query = `
-            SELECT teacher_nik, teacher_name, 
-                   string_agg(DISTINCT class_name, ', ') as kelas,
-                   count(id) as total_jp
-            FROM schedules 
-            WHERE date BETWEEN $1 AND $2
-            GROUP BY teacher_nik, teacher_name;
-        `;
-        const result = await pool.query(query, [start_date, end_date]);
 
-        const dataExcel = result.rows.map((row, index) => ({
-            "No": index + 1, 
-            "NIK": row.teacher_nik, 
-            "Nama Pengajar": row.teacher_name, 
-            "Kelas yg Diajar": row.kelas, 
-            "Total JP": row.total_jp 
+    const { start_date, end_date } = req.query;
+
+    if (!start_date || !end_date) {
+        return res.status(400).json({ message: 'start_date dan end_date wajib diisi.' });
+    }
+
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(start_date) || !dateRegex.test(end_date)) {
+        return res.status(400).json({ message: 'Format tanggal harus YYYY-MM-DD.' });
+    }
+
+    try {
+        const result = await pool.query(`
+        SELECT
+            teacher_nik                                    AS nik,
+            teacher_name                                   AS nama_pengajar,
+            STRING_AGG(DISTINCT class_name, ', ')          AS kelas_diajar,
+
+            -- SUM jam (bukan COUNT) per pekan
+            COALESCE(SUM(CASE WHEN pekan_ke = 1 THEN jam_jp END), 0) AS pekan_1,
+            COALESCE(SUM(CASE WHEN pekan_ke = 2 THEN jam_jp END), 0) AS pekan_2,
+            COALESCE(SUM(CASE WHEN pekan_ke = 3 THEN jam_jp END), 0) AS pekan_3,
+            COALESCE(SUM(CASE WHEN pekan_ke = 4 THEN jam_jp END), 0) AS pekan_4,
+            COALESCE(SUM(CASE WHEN pekan_ke = 5 THEN jam_jp END), 0) AS pekan_5,
+            SUM(jam_jp)                                    AS total_jp
+
+        FROM (
+            SELECT
+            *,
+            -- Hitung durasi jam: selisih time_end - time_start dalam jam
+            EXTRACT(EPOCH FROM (time_end::time - time_start::time)) / 3600 AS jam_jp,
+
+            -- Urutan pekan berdasarkan ISO week (Senin) dalam rentang tanggal
+            DENSE_RANK() OVER (
+                ORDER BY DATE_TRUNC('week', date::date)
+            ) AS pekan_ke
+
+            FROM schedules
+            WHERE date::date BETWEEN $1::date AND $2::date
+        ) sub
+
+        GROUP BY teacher_nik, teacher_name
+        ORDER BY teacher_name
+    `, [start_date, end_date]);
+
+        const headerRow1 = [
+            'No', 'NIK', 'Nama Pengajar', 'Kelas yg Diajar',
+            'Total Jam Pelajaran Per Pekan', '', '', '', '',  // merge E1:I1
+            'Total JP'
+        ];
+
+        const headerRow2 = [
+            '', '', '', '',                                   // merge ke bawah (A2:D2)
+            'Pekan 1', 'Pekan 2', 'Pekan 3', 'Pekan 4', 'Pekan 5',
+            ''                                                // merge ke bawah (J2)
+        ];
+
+        const dataRows = result.rows.map((row, i) => [
+            i + 1,
+            row.nik,
+            row.nama_pengajar,
+            row.kelas_diajar,
+            Number(row.pekan_1),
+            Number(row.pekan_2),
+            Number(row.pekan_3),
+            Number(row.pekan_4),
+            Number(row.pekan_5),
+            Number(row.total_jp),
+        ]);
+
+        const wsData = [headerRow1, headerRow2, ...dataRows];
+
+        const wb = xlsx.utils.book_new();
+        const ws = xlsx.utils.aoa_to_sheet(wsData);
+
+        ws['!merges'] = [
+            { s: { r: 0, c: 0 }, e: { r: 1, c: 0 } },
+            { s: { r: 0, c: 1 }, e: { r: 1, c: 1 } },
+            { s: { r: 0, c: 2 }, e: { r: 1, c: 2 } },
+            { s: { r: 0, c: 3 }, e: { r: 1, c: 3 } },
+            { s: { r: 0, c: 4 }, e: { r: 0, c: 8 } },
+            { s: { r: 0, c: 9 }, e: { r: 1, c: 9 } },
+        ];
+
+        ws['!cols'] = [
+            { wch: 5 }, { wch: 12 }, { wch: 25 }, { wch: 20 },
+            { wch: 8 }, { wch: 8 }, { wch: 8 }, { wch: 8 }, { wch: 8 }, { wch: 10 }
+        ];
+
+        xlsx.utils.book_append_sheet(wb, ws, 'Rekap JP');
+
+        const filename = `rekap_${start_date}_${end_date}.xlsx`;
+        const outputDir = path.join(__dirname, '../../public/reports');
+
+        if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+
+        const filepath = path.join(outputDir, filename);
+        xlsx.writeFile(wb, filepath);
+        const downloadUrl = `${req.protocol}://${req.get('host')}/reports/${filename}`;
+
+        res.status(200).json({
+            message: 'Laporan berhasil dibuat',
+            download_url: downloadUrl,
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            status: 'Error',
+            message: 'Gagal membuat laporan.',
+            error: err.message,
+        });
+    }
+};
+
+const getLaporanHarian = async (req, res) => {
+    try {
+        const { date } = req.query;
+
+        if (!date) {
+            return res.status(400).json({
+                status: 'Bad Request',
+                message: 'Parameter date wajib diisi (format: YYYY-MM-DD)'
+            });
+        }
+
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateRegex.test(date)) {
+            return res.status(400).json({
+                status: 'Bad Request',
+                message: 'Format tanggal tidak valid. Gunakan format YYYY-MM-DD'
+            });
+        }
+
+        const query = `
+            SELECT
+                teacher_nik,
+                teacher_name,
+                STRING_AGG(DISTINCT class_name, ', ' ORDER BY class_name) AS kelas_diajar,
+                COUNT(*) AS total_sesi,
+                SUM(
+                    EXTRACT(EPOCH FROM (time_end::time - time_start::time)) / 3600
+                ) AS total_jam,
+                JSON_AGG(
+                    JSON_BUILD_OBJECT(
+                        'jam_ke',      jam_ke,
+                        'class_name',  class_name,
+                        'subject_code',subject_code,
+                        'time_start',  time_start,
+                        'time_end',    time_end
+                    )
+                    ORDER BY jam_ke ASC
+                ) AS detail_jadwal
+            FROM schedules
+            WHERE date::date = $1::date
+            GROUP BY teacher_nik, teacher_name
+            ORDER BY teacher_name ASC;
+        `;
+        const result = await pool.query(query, [date]);
+
+        const totalJpHarian = result.rows.reduce(
+            (acc, r) => acc + Number(r.total_jam), 0
+        );
+
+        const rekap = result.rows.map(r => ({
+            teacher_nik: r.teacher_nik,
+            teacher_name: r.teacher_name,
+            kelas_diajar: r.kelas_diajar,
+            total_sesi: Number(r.total_sesi),
+            total_jam: Number(r.total_jam),
+            detail_jadwal: r.detail_jadwal
         }));
 
-        const worksheet = xlsx.utils.json_to_sheet(dataExcel);
-        const workbook = xlsx.utils.book_new();
-        xlsx.utils.book_append_sheet(workbook, worksheet, "Rekap JP");
+        return res.status(200).json({
+            status: 'Success',
+            message: 'Laporan harian berhasil diambil',
+            data: {
+                date,
+                total_pengajar: rekap.length,
+                total_jp_hari: parseFloat(totalJpHarian.toFixed(2)),
+                rekap
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'Error',
+            message: error.message
+        });
+    }
+};
 
-        const buffer = xlsx.write(workbook, { type: 'buffer', bookType: 'xlsx' });
-        
-        // Set header agar browser mengunduh langsung filenya
-        res.setHeader('Content-Disposition', 'attachment; filename="rekap_jp.xlsx"');
-        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        return res.send(buffer);
+const getLaporanBulanan = async (req, res) => {
+    try {
+        const { year, month } = req.query;
+
+        if (!year || !month) {
+            return res.status(400).json({
+                status: 'Bad Request',
+                message: 'Parameter year dan month wajib diisi'
+            });
+        }
+
+        const y = parseInt(year, 10);
+        const m = parseInt(month, 10);
+
+        if (isNaN(y) || isNaN(m) || m < 1 || m > 12) {
+            return res.status(400).json({
+                status: 'Bad Request',
+                message: 'year harus angka valid, month harus angka 1-12'
+            });
+        }
+
+        const startDate = `${y}-${String(m).padStart(2, '0')}-01`;
+        const endDate = new Date(y, m, 0).toISOString().split('T')[0]; // hari terakhir bulan
+
+        const namaBulan = [
+            '', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        const query = `
+            SELECT
+                teacher_nik                                     AS nik,
+                teacher_name                                    AS nama_pengajar,
+                STRING_AGG(DISTINCT class_name, ', '
+                    ORDER BY class_name)                        AS kelas_diajar,
+
+                COALESCE(SUM(CASE WHEN pekan_ke = 1 THEN jam_jp END), 0) AS pekan_1,
+                COALESCE(SUM(CASE WHEN pekan_ke = 2 THEN jam_jp END), 0) AS pekan_2,
+                COALESCE(SUM(CASE WHEN pekan_ke = 3 THEN jam_jp END), 0) AS pekan_3,
+                COALESCE(SUM(CASE WHEN pekan_ke = 4 THEN jam_jp END), 0) AS pekan_4,
+                COALESCE(SUM(CASE WHEN pekan_ke = 5 THEN jam_jp END), 0) AS pekan_5,
+                SUM(jam_jp)                                     AS total_jp
+
+            FROM (
+                SELECT
+                    *,
+                    EXTRACT(EPOCH FROM (time_end::time - time_start::time)) / 3600 AS jam_jp,
+                    DENSE_RANK() OVER (
+                        ORDER BY DATE_TRUNC('week', date::date)
+                    ) AS pekan_ke
+                FROM schedules
+                WHERE date::date BETWEEN $1::date AND $2::date
+            ) sub
+
+            GROUP BY teacher_nik, teacher_name
+            ORDER BY teacher_name ASC;
+        `;
+        const result = await pool.query(query, [startDate, endDate]);
+
+        const rekap = result.rows.map((r, i) => ({
+            no: i + 1,
+            nik: r.nik,
+            nama_pengajar: r.nama_pengajar,
+            kelas_diajar: r.kelas_diajar,
+            pekan_1: Number(r.pekan_1),
+            pekan_2: Number(r.pekan_2),
+            pekan_3: Number(r.pekan_3),
+            pekan_4: Number(r.pekan_4),
+            pekan_5: Number(r.pekan_5),
+            total_jp: Number(r.total_jp)
+        }));
+
+        const grandTotalJp = rekap.reduce((acc, r) => acc + r.total_jp, 0);
+
+        return res.status(200).json({
+            status: 'Success',
+            message: 'Laporan bulanan berhasil diambil',
+            data: {
+                periode: {
+                    year,
+                    month,
+                    nama_bulan: namaBulan[m],
+                    start_date: startDate,
+                    end_date: endDate
+                },
+                total_pengajar: rekap.length,
+                grand_total_jp: parseFloat(grandTotalJp.toFixed(2)),
+                rekap
+            }
+        });
     } catch (error) {
         res.status(500).json({
             status: 'Error',
@@ -449,10 +701,11 @@ module.exports = {
     createSchedule,
     updateSchedule,
     deleteSchedule,
-    getSchedulesByClassCode,
     getStudentSchedule,
     getTeacherSchedule,
     getYayasanReport,
     uploadExcel,
-    exportExcel
+    exportExcel,
+    getLaporanHarian,
+    getLaporanBulanan
 }
