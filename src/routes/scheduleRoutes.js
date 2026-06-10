@@ -40,6 +40,10 @@ const upload = multer({
     }
 });
 
+// Route publik (tidak perlu API key) — akses via browser untuk download file
+router.get('/export', exportExcel);
+
+// Semua route di bawah ini dilindungi API key
 router.use(verifyApiKey);
 
 router.get('/', getAllSchedules);
@@ -69,6 +73,5 @@ router.post('/upload', (req, res, next) => {
         next();
     });
 }, uploadExcel);
-router.get('/export', exportExcel);
 
 module.exports = router;
