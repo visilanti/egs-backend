@@ -1,7 +1,6 @@
-const path = require('path');
-const fs = require('fs');
 const pool = require('../config/db');
 const xlsx = require('xlsx');
+
 
 //GET /api/schedules - Get all schedules
 const getAllSchedules = async (req, res) => {
@@ -499,18 +498,14 @@ const exportExcel = async (req, res) => {
         xlsx.utils.book_append_sheet(wb, ws, 'Rekap JP');
 
         const filename = `rekap_${start_date}_${end_date}.xlsx`;
-        const outputDir = path.join(__dirname, '../../public/reports');
 
-        if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+        // Generate file as in-memory buffer (no disk write needed — compatible with Vercel)
+        const buffer = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
 
-        const filepath = path.join(outputDir, filename);
-        xlsx.writeFile(wb, filepath);
-        const downloadUrl = `${req.protocol}://${req.get('host')}/reports/${filename}`;
-
-        res.status(200).json({
-            message: 'Laporan berhasil dibuat',
-            download_url: downloadUrl,
-        });
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Length', buffer.length);
+        res.status(200).send(buffer);
 
     } catch (err) {
         console.error(err);
