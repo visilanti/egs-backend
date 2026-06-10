@@ -1,0 +1,1784 @@
+{
+  "info": {
+    "_postman_id": "bfb2fd25-25ae-4ca1-928a-3efabb3e21e2",
+    "name": "EGS Backend API - Schedule Management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28289647"
+  },
+  "item": [
+    {
+      "name": "POST Create Schedule",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"class_code\": \"XA03\",\r\n  \"class_name\": \"X-B\",\r\n  \"subject_code\": \"IT\",\r\n  \"teacher_nik\": \"20222040\",\r\n  \"teacher_name\": \"Silvia Nurrobianti, S.T.\",\r\n  \"date\": \"2025-02-10\",\r\n  \"jam_ke\": 1,\r\n  \"time_start\": \"08:40:00\",\r\n  \"time_end\": \"09:20:00\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/schedules",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "api",
+            "schedules"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "201 Created - Schedule berhasil dibuat",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"class_code\": \"XA03\",\r\n  \"class_name\": \"X-B\",\r\n  \"subject_code\": \"IT\",\r\n  \"teacher_nik\": \"20222040\",\r\n  \"teacher_name\": \"Silvia Nurrobianti, S.T.\",\r\n  \"date\": \"2025-02-14\",\r\n  \"jam_ke\": 1,\r\n  \"time_start\": \"08:40:00\",\r\n  \"time_end\": \"09:20:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "332"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 17:46:56 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"14c-ubGQ8SYyfpdJITwRiS5jI58Xx4E\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::2xdk5-1781113613903-8f2b9722be52"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Success\",\n    \"message\": \"Schedule created successfully\",\n    \"data\": {\n        \"id\": \"eda11948-693a-4fd6-9a83-5a1b79515cd6\",\n        \"class_code\": \"XA03\",\n        \"class_name\": \"X-B\",\n        \"subject_code\": \"IT\",\n        \"teacher_nik\": \"20222040\",\n        \"teacher_name\": \"Silvia Nurrobianti, S.T.\",\n        \"date\": \"2025-02-14T00:00:00.000Z\",\n        \"jam_ke\": 1,\n        \"time_start\": \"08:40:00\",\n        \"time_end\": \"09:20:00\"\n    }\n}"
+        },
+        {
+          "name": "409 Conflict - Jadwal bentrok (kelas/guru sudah terjadwal)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"class_code\": \"XA03\",\r\n  \"class_name\": \"X-B\",\r\n  \"subject_code\": \"IT\",\r\n  \"teacher_nik\": \"20222040\",\r\n  \"teacher_name\": \"Silvia Nurrobianti, S.T.\",\r\n  \"date\": \"2025-02-14\",\r\n  \"jam_ke\": 1,\r\n  \"time_start\": \"08:40:00\",\r\n  \"time_end\": \"09:20:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules"
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "98"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 17:50:43 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"62-T3q/YXt8Ju+hLsyTXNN0bSM44QA\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::qm752-1781113841515-3a7bd1a9da7a"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Conflict\",\n    \"message\": \"Bentrok jadwal: Kelas XA03 sudah memiliki jadwal di jam tersebut\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "POST Upload Excel (Bulk Import)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "id": 2,
+              "fileUploadError": "",
+              "src": [
+                "c:\\Users\\DELL 5420\\Downloads\\dummy_data (1).xlsx"
+              ]
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/schedules/upload",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "api",
+            "schedules",
+            "upload"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "201 OK - Semua baris berhasil diupload",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "fileUploadError": "",
+                  "src": "qgqXtoY8R/dummy_data_2 (1).xlsx"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/upload",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "upload"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "116"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:04:22 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"74-XhV/njlcZ7yLCFj2MO7sI+sf43c\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::9sl2w-1781114653523-61becae810e1"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Upload selesai. 20 baris berhasil, 0 baris gagal.\",\n    \"success_count\": 20,\n    \"failed_count\": 0,\n    \"failed_rows\": []\n}"
+        },
+        {
+          "name": "400 Bad Request - File tidak diupload",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "fileUploadError": "",
+                  "src": "k3FmMiMLo/dummy_data_2 (2).xlsx"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/upload",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "upload"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "37"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:29:23 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"25-+ku0fG7R6kWe3WCVvxGmTzo2qq0\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::qjvg8-1781116163206-f416cf7ccef6"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"File Excel wajib diupload\"\n}"
+        },
+        {
+          "name": "200 OK - Sebagian berhasil, sebagian bentrok",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "fileUploadError": "",
+                  "src": "hrBOM1Wmx/dummy_data_2 (5).xlsx"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/upload",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "upload"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 19:01:58 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"504-NspOtVqG6qy56/y1jVKuu6QCbW4\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::5j2x9-1781118114863-efe1a2fe1868"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"Upload selesai. 4 baris berhasil, 5 baris gagal.\",\n    \"success_count\": 4,\n    \"failed_count\": 5,\n    \"failed_rows\": [\n        {\n            \"row\": 2,\n            \"data\": {\n                \"class_code\": \"XA\",\n                \"class_name\": \"X A\",\n                \"subject_code\": \"IPS\",\n                \"teacher_nik\": \"NIK05\",\n                \"teacher_name\": \"Joko Widodo, S.Kom.\",\n                \"date\": 46204,\n                \"jam_ke\": 1,\n                \"time_start\": \"07:00:00\",\n                \"time_end\": \"08:00:00\"\n            },\n            \"reason\": \"Kelas XA bentrok\"\n        },\n        {\n            \"row\": 3,\n            \"data\": {\n                \"class_code\": \"XB\",\n                \"class_name\": \"X B\",\n                \"subject_code\": \"MTK\",\n                \"teacher_nik\": \"NIK01\",\n                \"teacher_name\": \"Budi Santoso, S.Pd.\",\n                \"date\": 46205,\n                \"jam_ke\": 1,\n                \"time_start\": \"08:00:00\",\n                \"time_end\": \"09:00:00\"\n            },\n            \"reason\": \"Kelas XB bentrok\"\n        },\n        {\n            \"row\": 4,\n            \"data\": {\n                \"class_code\": \"XC\",\n                \"class_name\": \"X C\",\n                \"subject_code\": \"B.IND\",\n                \"teacher_nik\": \"NIK02\",\n                \"teacher_name\": \"Siti Aminah, M.Pd.\",\n                \"date\": 46206,\n                \"jam_ke\": 1,\n                \"time_start\": \"09:00:00\",\n                \"time_end\": \"10:00:00\"\n            },\n            \"reason\": \"Kelas XC bentrok\"\n        },\n        {\n            \"row\": 5,\n            \"data\": {\n                \"class_code\": \"XD\",\n                \"class_name\": \"X D\",\n                \"subject_code\": \"B.ING\",\n                \"teacher_nik\": \"NIK03\",\n                \"teacher_name\": \"Andi Wijaya, S.Si.\",\n                \"date\": 46207,\n                \"jam_ke\": 1,\n                \"time_start\": \"10:00:00\",\n                \"time_end\": \"11:00:00\"\n            },\n            \"reason\": \"Kelas XD bentrok\"\n        },\n        {\n            \"row\": 6,\n            \"data\": {\n                \"class_code\": \"XE\",\n                \"class_name\": \"X E\",\n                \"subject_code\": \"IPA\",\n                \"teacher_nik\": \"NIK04\",\n                \"teacher_name\": \"Rina Melati, M.Si.\",\n                \"date\": 46211,\n                \"jam_ke\": 1,\n                \"time_start\": \"11:00:00\",\n                \"time_end\": \"12:00:00\"\n            },\n            \"reason\": \"Kelas XE bentrok\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "PUT Update Schedule by ID",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"class_code\": \"XA01\",\r\n  \"class_name\": \"X-A\",\r\n  \"subject_code\": \"PHYS\",\r\n  \"teacher_nik\": \"20222031\",\r\n  \"teacher_name\": \"Budi Santoso, M.Pd.\",\r\n  \"date\": \"2025-02-17\",\r\n  \"jam_ke\": 3,\r\n  \"time_start\": \"12:20:00\",\r\n  \"time_end\": \"13:00:00\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/schedules/07c1f150-1803-4418-93b3-3ec6ed9fb691",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "api",
+            "schedules",
+            "07c1f150-1803-4418-93b3-3ec6ed9fb691"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "409 Conflict - Jadwal bentrok (kelas/guru sudah terjadwal)",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"class_code\": \"XA01\",\r\n  \"class_name\": \"X-A\",\r\n  \"subject_code\": \"PHYS\",\r\n  \"teacher_nik\": \"20222031\",\r\n  \"teacher_name\": \"Budi Santoso, M.Pd.\",\r\n  \"date\": \"2025-02-11\",\r\n  \"jam_ke\": 3,\r\n  \"time_start\": \"09:20:00\",\r\n  \"time_end\": \"10:00:00\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/07c1f150-1803-4418-93b3-3ec6ed9fb691",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "07c1f150-1803-4418-93b3-3ec6ed9fb691"
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "98"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:37:41 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"62-+zH+wHUs9xtl2YwrbkK5cYM7jTg\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::s2nwv-1781116660187-ce9b71419f31"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Conflict\",\n    \"message\": \"Bentrok jadwal: Kelas XA01 sudah memiliki jadwal di jam tersebut\"\n}"
+        },
+        {
+          "name": "200 OK - Jadwal Berhasil Update",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"class_code\": \"XA01\",\r\n  \"class_name\": \"X-A\",\r\n  \"subject_code\": \"PHYS\",\r\n  \"teacher_nik\": \"20222031\",\r\n  \"teacher_name\": \"Budi Santoso, M.Pd.\",\r\n  \"date\": \"2025-02-17\",\r\n  \"jam_ke\": 3,\r\n  \"time_start\": \"12:20:00\",\r\n  \"time_end\": \"13:00:00\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/07c1f150-1803-4418-93b3-3ec6ed9fb691",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "07c1f150-1803-4418-93b3-3ec6ed9fb691"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "329"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:39:16 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"149-uqU/GYdBWwCVRdjgNd/eelrspTE\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::wj68v-1781116755342-20529026e548"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Success\",\n    \"message\": \"Schedule updated successfully\",\n    \"data\": {\n        \"id\": \"07c1f150-1803-4418-93b3-3ec6ed9fb691\",\n        \"class_code\": \"XA01\",\n        \"class_name\": \"X-A\",\n        \"subject_code\": \"PHYS\",\n        \"teacher_nik\": \"20222031\",\n        \"teacher_name\": \"Budi Santoso, M.Pd.\",\n        \"date\": \"2025-02-17T00:00:00.000Z\",\n        \"jam_ke\": 3,\n        \"time_start\": \"12:20:00\",\n        \"time_end\": \"13:00:00\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "GET All Schedules",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/schedules",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "api",
+            "schedules"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 OK - Berhasil mengambil data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:40:29 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"3305-yX7/Ux19sDboqw4O7U1dYfQqTWs\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::l6jqt-1781116827561-81716948b9de"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Success\",\n    \"message\": \"Schedules retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"766e89c2-e84e-4b88-959d-abbfde18dabe\",\n            \"class_code\": \"XA01\",\n            \"class_name\": \"X-A\",\n            \"subject_code\": \"CHEM\",\n            \"teacher_nik\": \"20222029\",\n            \"teacher_name\": \"Najdin Aqmarina, S.Pd.\",\n            \"date\": \"2025-02-10T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:40:00\",\n            \"time_end\": \"09:20:00\"\n        },\n        {\n            \"id\": \"60b1ccae-e89b-4dec-bf96-27bcabaeba8a\",\n            \"class_code\": \"XA01\",\n            \"class_name\": \"X-A\",\n            \"subject_code\": \"MATH\",\n            \"teacher_nik\": \"20222030\",\n            \"teacher_name\": \"jajang, s.pt\",\n            \"date\": \"2025-02-11T00:00:00.000Z\",\n            \"jam_ke\": 3,\n            \"time_start\": \"08:40:01\",\n            \"time_end\": \"09:20:01\"\n        },\n        {\n            \"id\": \"eda11948-693a-4fd6-9a83-5a1b79515cd6\",\n            \"class_code\": \"XA03\",\n            \"class_name\": \"X-B\",\n            \"subject_code\": \"IT\",\n            \"teacher_nik\": \"20222040\",\n            \"teacher_name\": \"Silvia Nurrobianti, S.T.\",\n            \"date\": \"2025-02-14T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"08:40:00\",\n            \"time_end\": \"09:20:00\"\n        },\n        {\n            \"id\": \"07c1f150-1803-4418-93b3-3ec6ed9fb691\",\n            \"class_code\": \"XA01\",\n            \"class_name\": \"X-A\",\n            \"subject_code\": \"PHYS\",\n            \"teacher_nik\": \"20222031\",\n            \"teacher_name\": \"Budi Santoso, M.Pd.\",\n            \"date\": \"2025-02-17T00:00:00.000Z\",\n            \"jam_ke\": 3,\n            \"time_start\": \"12:20:00\",\n            \"time_end\": \"13:00:00\"\n        },\n        {\n            \"id\": \"15bb2c92-8eb4-4866-889d-2665bd793eb6\",\n            \"class_code\": \"XD\",\n            \"class_name\": \"X D\",\n            \"subject_code\": \"IPA\",\n            \"teacher_nik\": \"NIK04\",\n            \"teacher_name\": \"Rina Melati, M.Si.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"34f081b9-26b4-43cd-925d-6fac1f14882d\",\n            \"class_code\": \"XE\",\n            \"class_name\": \"X E\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"d5735b3b-5e5b-4edd-a0c8-65d23d927942\",\n            \"class_code\": \"XA\",\n            \"class_name\": \"X A\",\n            \"subject_code\": \"MTK\",\n            \"teacher_nik\": \"NIK01\",\n            \"teacher_name\": \"Budi Santoso, S.Pd.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"2c7c5722-f1ea-4d9f-bdb9-554a4c2cbd16\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"B.IND\",\n            \"teacher_nik\": \"NIK02\",\n            \"teacher_name\": \"Siti Aminah, M.Pd.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"feb99ede-2131-484e-a129-2c3c92ded6bd\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"a34d89c2-7841-4d67-bdab-2f0832816159\",\n            \"class_code\": \"XE\",\n            \"class_name\": \"X E\",\n            \"subject_code\": \"MTK\",\n            \"teacher_nik\": \"NIK01\",\n            \"teacher_name\": \"Budi Santoso, S.Pd.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"a367afc5-f6d9-49d7-9db7-102a9d22191f\",\n            \"class_code\": \"XA\",\n            \"class_name\": \"X A\",\n            \"subject_code\": \"B.IND\",\n            \"teacher_nik\": \"NIK02\",\n            \"teacher_name\": \"Siti Aminah, M.Pd.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"c4b3be9e-a26a-456d-99a3-2777250dff54\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"fc19f105-57d2-48c5-912f-c2c7488dde8c\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"IPA\",\n            \"teacher_nik\": \"NIK04\",\n            \"teacher_name\": \"Rina Melati, M.Si.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"96e0395f-44c4-4fbd-9d14-90ea005ef872\",\n            \"class_code\": \"XD\",\n            \"class_name\": \"X D\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-15T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"4b13a254-9fb0-46d7-b20e-a5f9cd9aae47\",\n            \"class_code\": \"XE\",\n            \"class_name\": \"X E\",\n            \"subject_code\": \"B.IND\",\n            \"teacher_nik\": \"NIK02\",\n            \"teacher_name\": \"Siti Aminah, M.Pd.\",\n            \"date\": \"2026-06-16T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"ecdf0154-8cb5-40ea-9f93-e1075e25055a\",\n            \"class_code\": \"XA\",\n            \"class_name\": \"X A\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-16T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"9a14d210-5236-4076-b8f0-25483dff1ce3\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"IPA\",\n            \"teacher_nik\": \"NIK04\",\n            \"teacher_name\": \"Rina Melati, M.Si.\",\n            \"date\": \"2026-06-16T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"9487536c-8803-45bf-aa0f-aeb9be4b907b\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-16T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"9cf81e02-9cd9-43d8-8321-3512a3265278\",\n            \"class_code\": \"XD\",\n            \"class_name\": \"X D\",\n            \"subject_code\": \"MTK\",\n            \"teacher_nik\": \"NIK01\",\n            \"teacher_name\": \"Budi Santoso, S.Pd.\",\n            \"date\": \"2026-06-16T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"5829947d-3f10-443d-9398-7f5b9ef08468\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-17T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"1ec83e92-4e14-466d-a2ca-c8f7adb679f1\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"MTK\",\n            \"teacher_nik\": \"NIK01\",\n            \"teacher_name\": \"Budi Santoso, S.Pd.\",\n            \"date\": \"2026-06-17T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"a3d5c644-0b50-41e2-9bcf-5ec174793ad5\",\n            \"class_code\": \"XD\",\n            \"class_name\": \"X D\",\n            \"subject_code\": \"B.IND\",\n            \"teacher_nik\": \"NIK02\",\n            \"teacher_name\": \"Siti Aminah, M.Pd.\",\n            \"date\": \"2026-06-17T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"81a6eb51-7e5a-42bb-b948-7f175e7f4948\",\n            \"class_code\": \"XE\",\n            \"class_name\": \"X E\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-17T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"b213a447-db15-44b8-be32-8182ac3bfc05\",\n            \"class_code\": \"XE\",\n            \"class_name\": \"X E\",\n            \"subject_code\": \"IPA\",\n            \"teacher_nik\": \"NIK04\",\n            \"teacher_name\": \"Rina Melati, M.Si.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"4f5d111d-9a82-4f37-83c2-e9f514aa6bbc\",\n            \"class_code\": \"XD\",\n            \"class_name\": \"X D\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"d254a5c6-8c8b-4910-b9f6-961bff521fb8\",\n            \"class_code\": \"XA\",\n            \"class_name\": \"X A\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"6b395551-5cfa-43fb-a350-83141e7b38e0\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"MTK\",\n            \"teacher_nik\": \"NIK01\",\n            \"teacher_name\": \"Budi Santoso, S.Pd.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"87df153d-5596-4bb4-bd4a-42822ff1771c\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"B.IND\",\n            \"teacher_nik\": \"NIK02\",\n            \"teacher_name\": \"Siti Aminah, M.Pd.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"4f7792b9-30fb-486d-abc7-9605f4f4d7f2\",\n            \"class_code\": \"XA\",\n            \"class_name\": \"X A\",\n            \"subject_code\": \"MTK\",\n            \"teacher_nik\": \"NIK01\",\n            \"teacher_name\": \"Budi Santoso, S.Pd.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"1553c18c-087e-4830-b050-8610da763138\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"B.IND\",\n            \"teacher_nik\": \"NIK02\",\n            \"teacher_name\": \"Siti Aminah, M.Pd.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"11020de0-5556-4819-973f-48e5edaeeaa4\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"cf432498-350c-4f96-9484-7a94f4c4b39f\",\n            \"class_code\": \"XD\",\n            \"class_name\": \"X D\",\n            \"subject_code\": \"IPA\",\n            \"teacher_nik\": \"NIK04\",\n            \"teacher_name\": \"Rina Melati, M.Si.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"604c4cdd-0b6a-4bf2-b111-74e50a21374c\",\n            \"class_code\": \"XE\",\n            \"class_name\": \"X E\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:00:00\",\n            \"time_end\": \"09:00:00\"\n        },\n        {\n            \"id\": \"403b8ec3-ae18-4e6f-8c8f-c97dcea65514\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 3,\n            \"time_start\": \"09:00:00\",\n            \"time_end\": \"10:00:00\"\n        },\n        {\n            \"id\": \"94295307-ce70-4216-92db-56abf41ce3c3\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"IPA\",\n            \"teacher_nik\": \"NIK04\",\n            \"teacher_name\": \"Rina Melati, M.Si.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 3,\n            \"time_start\": \"09:00:00\",\n            \"time_end\": \"10:00:00\"\n        },\n        {\n            \"id\": \"13ca978b-e5ff-45f4-bda5-70ba2b461e40\",\n            \"class_code\": \"XE\",\n            \"class_name\": \"X E\",\n            \"subject_code\": \"MTK\",\n            \"teacher_nik\": \"NIK01\",\n            \"teacher_name\": \"Budi Santoso, S.Pd.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 3,\n            \"time_start\": \"09:00:00\",\n            \"time_end\": \"10:00:00\"\n        },\n        {\n            \"id\": \"b9b6b88d-128e-4a38-be08-b7111e0ce922\",\n            \"class_code\": \"XD\",\n            \"class_name\": \"X D\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 3,\n            \"time_start\": \"09:00:00\",\n            \"time_end\": \"10:00:00\"\n        },\n        {\n            \"id\": \"6e2f642f-387a-40c5-b8a2-907da3be75d7\",\n            \"class_code\": \"XA\",\n            \"class_name\": \"X A\",\n            \"subject_code\": \"B.IND\",\n            \"teacher_nik\": \"NIK02\",\n            \"teacher_name\": \"Siti Aminah, M.Pd.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 3,\n            \"time_start\": \"09:00:00\",\n            \"time_end\": \"10:00:00\"\n        },\n        {\n            \"id\": \"ede2ffaa-6cea-4755-b66d-2e734de67cc2\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 4,\n            \"time_start\": \"10:00:00\",\n            \"time_end\": \"11:00:00\"\n        },\n        {\n            \"id\": \"b6ebce4f-35ce-46fa-bb23-1207bade8475\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"IPA\",\n            \"teacher_nik\": \"NIK04\",\n            \"teacher_name\": \"Rina Melati, M.Si.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 4,\n            \"time_start\": \"10:00:00\",\n            \"time_end\": \"11:00:00\"\n        },\n        {\n            \"id\": \"199f894a-f20c-41df-b6f5-58f8bd8920dc\",\n            \"class_code\": \"XA\",\n            \"class_name\": \"X A\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-18T00:00:00.000Z\",\n            \"jam_ke\": 4,\n            \"time_start\": \"10:00:00\",\n            \"time_end\": \"11:00:00\"\n        },\n        {\n            \"id\": \"97e9d684-685a-4d24-b721-fba80115af11\",\n            \"class_code\": \"XA\",\n            \"class_name\": \"X A\",\n            \"subject_code\": \"B.IND\",\n            \"teacher_nik\": \"NIK02\",\n            \"teacher_name\": \"Siti Aminah, M.Pd.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"7d8ac8b2-5a94-4d50-a8ef-c2f84eab144b\",\n            \"class_code\": \"XE\",\n            \"class_name\": \"X E\",\n            \"subject_code\": \"MTK\",\n            \"teacher_nik\": \"NIK01\",\n            \"teacher_name\": \"Budi Santoso, S.Pd.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"5a549b76-27dd-4185-9754-a7906034bbdc\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"IPA\",\n            \"teacher_nik\": \"NIK04\",\n            \"teacher_name\": \"Rina Melati, M.Si.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"8a0e5516-ad91-4a2f-9810-fa252126fdc8\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"4574210c-cb77-429c-a3e5-4fb739ab7da3\",\n            \"class_code\": \"XD\",\n            \"class_name\": \"X D\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 1,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"3664cfc3-cedc-4443-a6dc-0f3374de4c6f\",\n            \"class_code\": \"XB\",\n            \"class_name\": \"X B\",\n            \"subject_code\": \"IPA\",\n            \"teacher_nik\": \"NIK04\",\n            \"teacher_name\": \"Rina Melati, M.Si.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"fab33445-cf1f-43f8-b0cc-571bafdd046e\",\n            \"class_code\": \"XA\",\n            \"class_name\": \"X A\",\n            \"subject_code\": \"B.ING\",\n            \"teacher_nik\": \"NIK03\",\n            \"teacher_name\": \"Andi Wijaya, S.Si.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"6015a325-64d8-4e0b-9288-269f5244b833\",\n            \"class_code\": \"XE\",\n            \"class_name\": \"X E\",\n            \"subject_code\": \"B.IND\",\n            \"teacher_nik\": \"NIK02\",\n            \"teacher_name\": \"Siti Aminah, M.Pd.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"5778eb29-634f-43ab-bc90-a5b6eb9f693a\",\n            \"class_code\": \"XD\",\n            \"class_name\": \"X D\",\n            \"subject_code\": \"MTK\",\n            \"teacher_nik\": \"NIK01\",\n            \"teacher_name\": \"Budi Santoso, S.Pd.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        },\n        {\n            \"id\": \"68f67d95-2a43-49c0-a292-ca164f801092\",\n            \"class_code\": \"XC\",\n            \"class_name\": \"X C\",\n            \"subject_code\": \"IPS\",\n            \"teacher_nik\": \"NIK05\",\n            \"teacher_name\": \"Joko Widodo, S.Kom.\",\n            \"date\": \"2026-06-19T00:00:00.000Z\",\n            \"jam_ke\": 2,\n            \"time_start\": \"07:00:00\",\n            \"time_end\": \"08:00:00\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "GET Student Schedule",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/schedules/students?class_code=XA01&date=2025",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "api",
+            "schedules",
+            "students"
+          ],
+          "query": [
+            {
+              "key": "class_code",
+              "value": "XA01"
+            },
+            {
+              "key": "date",
+              "value": "2025"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 OK - Berhasil mengambil data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/students?class_code=XA01&date=2025",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "students"
+              ],
+              "query": [
+                {
+                  "key": "class_code",
+                  "value": "XA01"
+                },
+                {
+                  "key": "date",
+                  "value": "2025"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "171"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:42:15 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"ab-aToAel3GUKdmQ/irKMeK0kOX+K0\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::j58tz-1781116933816-c8207f32ce55"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"classname\": \"X-A\",\n    \"date\": \"2025-02-10\",\n    \"Jadwal\": [\n        {\n            \"jam_ke\": 2,\n            \"subject_code\": \"CHEM\",\n            \"teacher_name\": \"Najdin Aqmarina, S.Pd.\",\n            \"time_start\": \"08:40:00\",\n            \"time_end\": \"09:20:00\"\n        }\n    ]\n}"
+        },
+        {
+          "name": "500 Error - Invalid Syntax",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/students?class_code=XA01&date=2025-",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "students"
+              ],
+              "query": [
+                {
+                  "key": "class_code",
+                  "value": "XA01"
+                },
+                {
+                  "key": "date",
+                  "value": "2025-"
+                }
+              ]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "76"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:44:43 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"4c-3GUeT592Y3aUe0hZLzDkuA6eRWc\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::58jf7-1781117082331-7cc74d09be39"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Error\",\n    \"message\": \"invalid input syntax for type date: \\\"2025-\\\"\"\n}"
+        },
+        {
+          "name": "400 Bad Request - Missing required query",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/students?class_code=XA01",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "students"
+              ],
+              "query": [
+                {
+                  "key": "class_code",
+                  "value": "XA01"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "60"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:46:11 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"3c-xrv36myVCVsaDlnKvTK8ZiOh/Qg\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::4cnr5-1781117171672-b2b5db4dc3b2"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Bad Request\",\n    \"message\": \"Missing required fields\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "GET Teacher Schedule",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/schedules/teacher?teacher_nik=20222029&start_date=2025-02-10&end_date=2025-02-14",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "api",
+            "schedules",
+            "teacher"
+          ],
+          "query": [
+            {
+              "key": "teacher_nik",
+              "value": "20222029"
+            },
+            {
+              "key": "start_date",
+              "value": "2025-02-10"
+            },
+            {
+              "key": "end_date",
+              "value": "2025-02-14"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 OK - Berhasil mengambil data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/teacher?teacher_nik=20222029&start_date=2025-02-10&end_date=2025-02-14",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "teacher"
+              ],
+              "query": [
+                {
+                  "key": "teacher_nik",
+                  "value": "20222029"
+                },
+                {
+                  "key": "start_date",
+                  "value": "2025-02-10"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025-02-14"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "247"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:47:15 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"f7-BOsKvBNqSq+oUOPamRzXUdByzuI\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::7rnq7-1781117234095-9455a96a52d5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"teacher_name\": \"Najdin Aqmarina, S.Pd.\",\n    \"periode\": {\n        \"start date\": \"2025-02-10\",\n        \"end_date\": \"2025-02-14\"\n    },\n    \"total jp\": 1,\n    \"jadwal\": [\n        {\n            \"date\": \"2025-02-10\",\n            \"class_name\": \"X-A\",\n            \"subject_code\": \"CHEM\",\n            \"jam_ke\": 2,\n            \"time_start\": \"08:40:00\",\n            \"time_end\": \"09:20:00\"\n        }\n    ]\n}"
+        },
+        {
+          "name": "400 Bad Request - Missing required query",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/teacher?start_date=2025-02-10&end_date=2025-02-14",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "teacher"
+              ],
+              "query": [
+                {
+                  "key": "teacher_nik",
+                  "value": "20222029",
+                  "disabled": true
+                },
+                {
+                  "key": "start_date",
+                  "value": "2025-02-10"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025-02-14"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "61"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:47:44 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"3d-aluf6R0ZcHWLmafDpNxzLw+rOqk\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::r4xbs-1781117264547-c5fdbe0751ec"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"teacher_nik, start_date, dan end_date wajib diisi\"\n}"
+        },
+        {
+          "name": "500 Error - Invalid Syntax",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/teacher?teacher_nik=20222029&start_date=2025-02-10&end_date=2025",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "teacher"
+              ],
+              "query": [
+                {
+                  "key": "teacher_nik",
+                  "value": "20222029"
+                },
+                {
+                  "key": "start_date",
+                  "value": "2025-02-10"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025"
+                }
+              ]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "75"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:49:27 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"4b-NRTYaRjf9Dedbqq3hxnFFB72CZ4\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::464dz-1781117365532-c4eabd499036"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Error\",\n    \"message\": \"invalid input syntax for type date: \\\"2025\\\"\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "GET Rekap JP - Yayasan Report",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/schedules/report/rekap-jp?start_date=2025-02-01&end_date=2025-02-28",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "api",
+            "schedules",
+            "report",
+            "rekap-jp"
+          ],
+          "query": [
+            {
+              "key": "start_date",
+              "value": "2025-02-01"
+            },
+            {
+              "key": "end_date",
+              "value": "2025-02-28"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 OK - Berhasil mengambil data",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/report/rekap-jp?start_date=2025-02-01&end_date=2025-02-28",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "report",
+                "rekap-jp"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2025-02-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025-02-28"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "649"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:52:28 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"289-Vj9Tnr3stdmxxEbewQ9vNNpAXiw\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::7l8nr-1781117546734-6dad533b4985"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"periode\": {\n        \"start date\": \"2025-02-01\",\n        \"end date\": \"2025-02-28\"\n    },\n    \"total pengajar\": 4,\n    \"rekap\": [\n        {\n            \"teacher nik\": \"20222029\",\n            \"teacher_name\": \"Najdin Aqmarina, S.Pd.\",\n            \"total jp\": 1,\n            \"total_kelas\": 1,\n            \"detail\": [\n                {\n                    \"class_name\": \"X-A\",\n                    \"jumlah jp\": 1\n                }\n            ]\n        },\n        {\n            \"teacher nik\": \"20222030\",\n            \"teacher_name\": \"jajang, s.pt\",\n            \"total jp\": 1,\n            \"total_kelas\": 1,\n            \"detail\": [\n                {\n                    \"class_name\": \"X-A\",\n                    \"jumlah jp\": 1\n                }\n            ]\n        },\n        {\n            \"teacher nik\": \"20222031\",\n            \"teacher_name\": \"Budi Santoso, M.Pd.\",\n            \"total jp\": 1,\n            \"total_kelas\": 1,\n            \"detail\": [\n                {\n                    \"class_name\": \"X-A\",\n                    \"jumlah jp\": 1\n                }\n            ]\n        },\n        {\n            \"teacher nik\": \"20222040\",\n            \"teacher_name\": \"Silvia Nurrobianti, S.T.\",\n            \"total jp\": 1,\n            \"total_kelas\": 1,\n            \"detail\": [\n                {\n                    \"class_name\": \"X-B\",\n                    \"jumlah jp\": 1\n                }\n            ]\n        }\n    ]\n}"
+        },
+        {
+          "name": "400 Bad Request - Missing required query",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/report/rekap-jp?start_date=2025-02-01",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "report",
+                "rekap-jp"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2025-02-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025-02-28",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "47"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:52:53 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"2f-UBrkSmlaPdfBUAkoGJuXyEJlRTc\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::g8k7t-1781117573424-ca3be1d0d147"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"start_date dan end_date wajib diisi\"\n}"
+        },
+        {
+          "name": "500 Error - Invalid Syntax",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/report/rekap-jp?start_date=2025-02-01&end_date=2025",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "report",
+                "rekap-jp"
+              ],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2025-02-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025"
+                }
+              ]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Age",
+              "value": "0"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "75"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:53:25 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"4b-NRTYaRjf9Dedbqq3hxnFFB72CZ4\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::jcshj-1781117603880-1a51ab02347c"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Error\",\n    \"message\": \"invalid input syntax for type date: \\\"2025\\\"\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "delete_schedule/:id",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/schedules/07c1f150-1803-4418-93b3-3ec6ed9fb691",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "api",
+            "schedules",
+            "07c1f150-1803-4418-93b3-3ec6ed9fb691"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "404 Data not found",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/1a9e870d-fb97-43d1-bc06-d0fdd7ac008f",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "1a9e870d-fb97-43d1-bc06-d0fdd7ac008f"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "53"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:53:54 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"35-tOsTXjUT+3yzSokx/xAkLqrJFLs\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::f4v86-1781117634567-418b42b72f82"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Not Found\",\n    \"message\": \"Schedule not found\"\n}"
+        },
+        {
+          "name": "200 OK - Berhasil menghapus data",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/schedules/07c1f150-1803-4418-93b3-3ec6ed9fb691",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "schedules",
+                "07c1f150-1803-4418-93b3-3ec6ed9fb691"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            },
+            {
+              "key": "Content-Length",
+              "value": "329"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 10 Jun 2026 18:54:48 GMT"
+            },
+            {
+              "key": "Etag",
+              "value": "W/\"149-YWyYN5pxCM3hpNMHioQXKVozAT4\""
+            },
+            {
+              "key": "Server",
+              "value": "Vercel"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=63072000; includeSubDomains; preload"
+            },
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "X-Vercel-Cache",
+              "value": "MISS"
+            },
+            {
+              "key": "X-Vercel-Id",
+              "value": "iad1::iad1::2q864-1781117686905-23eda1b97a1b"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"Success\",\n    \"message\": \"Schedule deleted successfully\",\n    \"data\": {\n        \"id\": \"07c1f150-1803-4418-93b3-3ec6ed9fb691\",\n        \"class_code\": \"XA01\",\n        \"class_name\": \"X-A\",\n        \"subject_code\": \"PHYS\",\n        \"teacher_nik\": \"20222031\",\n        \"teacher_name\": \"Budi Santoso, M.Pd.\",\n        \"date\": \"2025-02-17T00:00:00.000Z\",\n        \"jam_ke\": 3,\n        \"time_start\": \"12:20:00\",\n        \"time_end\": \"13:00:00\"\n    }\n}"
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "SECRET123",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "https://visilanti-egs-backend.vercel.app"
+    }
+  ]
+}
