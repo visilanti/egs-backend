@@ -509,7 +509,10 @@ const exportExcel = async (req, res) => {
         }
 
         // Default → kembalikan JSON berisi download_url (format lama)
-        const downloadUrl = `${req.protocol}://${req.get('host')}/api/schedules/export?start_date=${start_date}&end_date=${end_date}&download=true`;
+        // Gunakan x-forwarded-proto agar benar di Vercel (yang selalu forward sebagai https)
+        const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+        const host = req.get('host');
+        const downloadUrl = `${protocol}://${host}/api/schedules/export?start_date=${start_date}&end_date=${end_date}&download=true`;
 
         res.status(200).json({
             status: 'Success',
