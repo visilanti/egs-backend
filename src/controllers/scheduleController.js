@@ -499,13 +499,23 @@ const exportExcel = async (req, res) => {
 
         const filename = `rekap_${start_date}_${end_date}.xlsx`;
 
-        // Generate file as in-memory buffer (no disk write needed — compatible with Vercel)
-        const buffer = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
+        // Jika ?download=true → langsung stream file ke browser (tanpa tulis ke disk)
+        if (req.query.download === 'true') {
+            const buffer = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
+            res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            res.setHeader('Content-Length', buffer.length);
+            return res.status(200).send(buffer);
+        }
 
-        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        res.setHeader('Content-Length', buffer.length);
-        res.status(200).send(buffer);
+        // Default → kembalikan JSON berisi download_url (format lama)
+        const downloadUrl = `${req.protocol}://${req.get('host')}/api/schedules/export?start_date=${start_date}&end_date=${end_date}&download=true`;
+
+        res.status(200).json({
+            status: 'Success',
+            message: 'Laporan berhasil dibuat',
+            download_url: downloadUrl,
+        });
 
     } catch (err) {
         console.error(err);
