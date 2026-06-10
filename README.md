@@ -315,6 +315,61 @@ Proyek ini dikonfigurasi untuk berjalan sebagai **Vercel Serverless Function** m
 
 ---
 
+## 🧪 Pengujian dengan Postman
+
+File Postman Collection sudah disediakan untuk mempermudah pengujian semua endpoint tanpa perlu membuat request dari nol.
+
+📁 **Lokasi file:** `docs/EGS Backend Test.postman_collection.json`
+
+### Cara Import ke Postman:
+
+1. Buka aplikasi **Postman**.
+2. Klik tombol **Import** (pojok kiri atas).
+3. Pilih file `docs/EGS Backend Test.postman_collection.json`.
+4. Collection **"EGS Backend Test"** akan langsung muncul berisi semua request yang siap digunakan.
+
+### Pengujian di Production (Vercel)
+
+Collection sudah dikonfigurasi secara default untuk mengarah ke URL production:
+
+```
+BASE_URL = https://visilanti-egs-backend.vercel.app/
+```
+
+API Key (`x-api-key`) sudah terpasang di level Collection sehingga otomatis diterapkan ke semua request.
+
+### Pengujian Lokal (localhost)
+
+Jika ingin menguji di server lokal, cukup ubah nilai variabel `BASE_URL`:
+
+1. Klik nama collection **"EGS Backend Test"** → tab **Variables**.
+2. Ubah nilai `BASE_URL` dari:
+   ```
+   https://visilanti-egs-backend.vercel.app/
+   ```
+   menjadi:
+   ```
+   http://localhost:3000
+   ```
+3. Klik **Save**, lalu jalankan request seperti biasa.
+
+> **Catatan:** Pastikan server lokal sudah berjalan terlebih dahulu dengan `npm run dev` dan file `.env` sudah terkonfigurasi dengan benar sebelum melakukan pengujian lokal.
+
+### Request yang Tersedia
+
+| Nama Request | Method | Endpoint |
+|---|---|---|
+| `get_all_schedules` | GET | `/api/schedules` |
+| `create_schedule` | POST | `/api/schedules` |
+| `update_schedule/:id` | PUT | `/api/schedules/:id` |
+| `delete_schedule/:id` | DELETE | `/api/schedules/:id` |
+| `get_student_schedule` | GET | `/api/schedules/students` |
+| `get_teacher_schedule` | GET | `/api/schedules/teacher` |
+| `get_rekap_JP` | GET | `/api/schedules/report/rekap-jp` |
+| `upload_excel` | POST | `/api/schedules/upload` |
+
+---
+
 ## 🛡️ Fitur Deteksi Bentrok Jadwal
 
 Sistem secara otomatis mendeteksi dan menolak jadwal yang **bentrok** berdasarkan:
